@@ -3,19 +3,26 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
+import { doGoogleLoginAction } from '../redux/userDuck';
 
 
 export const Login = () => {
-  const loading = false
+  const { fetching, loggedIn } = useSelector( store =>store.authGoogle);
 
+  const dispatch = useDispatch()
   let history = useHistory()
 
   const handleSubmit = () => {
-    history.push('/link')
+    dispatch(doGoogleLoginAction())
+   
+    
   }
-
+  if(fetching) return <h2>Cargando...</h2>
+  if(loggedIn) history.push('/link');
   return (
     <>
+    
       <br />
       <div className='container-fluid'>
         <div className='row justify-content-center align-items-center minh-100'>
@@ -32,7 +39,7 @@ export const Login = () => {
                     style={{ justifyContent: 'center' }}
                     className="btn btn-primary btn-block"
                     type="submit"
-                    disabled={loading}
+                    // disabled={fetching}
                     onClick={handleSubmit}
                   >
                     <div className="google-icon-wrapper ">

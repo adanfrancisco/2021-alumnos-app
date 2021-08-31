@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Header from '../components/Header'
+import {  useDispatch, useSelector } from 'react-redux'
+import { doLogoutAction } from '../redux/userDuck'
 
 export const LinkAccount = () => {
-
+    const { displayName } = useSelector( store =>store.authGoogle);
     const  maxLengthCheck = (object) => {
         if (object.target.value.length > object.target.maxLength) {
          object.target.value = object.target.value.slice(0, object.target.maxLength)
           }
         }
-
+const dispatch = useDispatch()
     let history = useHistory()
 
     const [dni, setDNI] = useState(0)
 
     const handleReturn = () => {
+        dispatch(doLogoutAction())
         history.push('/login')
     }
     const handleSubmit=(e)=>{
@@ -30,18 +33,10 @@ export const LinkAccount = () => {
     return (
         <>
             <Header />
-            <h3>Linkear cuenta Google con DNI</h3>
-            Aqui deberia ya estar logueado con Google (REDUX)
-            y buscar en la base de datos de alumnos por DNI
-            si lo encuentra, permitiria asociar el ID de Google
-            al usuario y podria acceder directamente la proxima vez
-            simplemente utilizando el login de Googles
-
+            <h1>Hola {displayName}!</h1>
+            <h4>Vamos a buscarte en la base de datos</h4>
+            Primero buscamos tu DNI y luego entraras directamente.
             <hr />
-
-
-
-
             <form onSubmit={handleSubmit} className="ls-form ls-form-horizontal row">
                 <fieldset>
                     <label className="ls-label col-md-4">

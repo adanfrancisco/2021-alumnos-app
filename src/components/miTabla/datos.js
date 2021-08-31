@@ -1,6 +1,6 @@
-{
-    "alumnos": [{
-        "idAlumno": "1",
+export const 
+    alumnos= [{
+        "idAlumno": "13543567",
         "nombre": "Diego Armando Lira Rodríguez",
         "fecha_nacimiento": "10-10-1992",
         "activo": 1,
@@ -75,4 +75,3 @@
         "sexo": "M",
         "fecha_alta":"01-05-2016"
     }]
-}

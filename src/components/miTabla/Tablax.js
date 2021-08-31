@@ -1,39 +1,107 @@
-import React from 'react'
+import React, { Component } from 'react'
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import cellEditFactory from 'react-bootstrap-table2-editor';
+// import ToolkitProvider, { CSVExport } from 'react-bootstrap-table2-toolkit';
+// const { ExportCSVButton } = CSVExport;
 
-import datos from './datos'
-export const Tablax = () => {
-    return (
-        <div>
-            <h2>Listado de productos en la base de datos MongoDB</h2>
-            <table id="customers">
-              <thead>
-                <tr>
-                    <th >Nombre</th>
-                    <th>Descripción</th>
-                    <th>Precio en USD</th>
-                    <th>Acción </th>
-                </tr>
-              </thead>
-              <tbody>    
-                {data.products.map((product, key) => {
-                  return  <tr key={key} >
-                    <td onClick={this.handleVisibility}>
-                      <p hidden={this.state.campoVisible} value='test'>{product.name}</p>
-                      <p hidden={this.state.inputVisible}>
-                        <input value={product.name} />
-                      </p>
-                    </td> 
-                    <td>{product.description}</td>
-                    <td>{ "$" + product.price}</td>
-                    <Mutation  mutation={DELETE_CURRENT_PRODUCT}>
-                    {(deleteproduct, { data }) => (
-                      <td><button onClick={() => deleteproduct({variables: {_id: product._id }})}>Eliminar</button></td>
-                    )}
-                    </Mutation>                 
-                  </tr>
-                })}  
-              </tbody>
-            </table>
-          </div>
-    )
+
+const person = [
+   { id: 1, name: 'Gob', value: '2' },
+   { id: 2, name: 'Buster', value: '5' },
+   { id: 3, name: 'George Michael', value: '4' }
+];
+
+
+const columns = [{
+   dataField: 'id',
+   text: 'Product ID',
+   headerStyle: (colum, colIndex) => {
+      return {
+         width: '20%',
+         textAlign: 'center',
+         backgroundColor: '#00ffff'
+      };
+   },
+   
+   style: { backgroundColor: '#00afb9' }
+},
+
+{
+   dataField: 'name',
+   text: 'Product Name',
+   sort: true,
+   headerStyle: (colum, colIndex) => {
+      return { width: '60%', textAlign: 'center' };
+   },
+   style: { backgroundColor: '#fdfcdc' }
+}, {
+   dataField: 'value',
+   text: 'Product value',
+   headerStyle: (colum, colIndex) => {
+      return { width: '20%', textAlign: 'center' };
+   },
+   style: { backgroundColor: '#fed9b7' }
+
+}];
+
+const options = {
+   page: 1,
+   sizePerPage: 5,
+   nextPageText: '>',
+   prePageText: '<',
+   showTotal: true
+};
+
+
+
+class Table extends Component {
+   render() {
+      return (
+
+         <div className="container-fluid">
+            <p className="Table-header">Basic Table</p>
+           
+            <BootstrapTable
+               striped
+               
+               hover
+               keyField='id'
+               data={person}
+               columns={columns}
+               pagination={paginationFactory(options)}
+
+               cellEdit={cellEditFactory({
+                  mode: 'click',
+                  blurToSave: true,
+                  nonEditableRows: () => [0]
+               })}
+            />
+
+            {/* <ToolkitProvider
+               keyField="id"
+               data={person}
+               columns={columns}
+               exportCSV
+            >
+               {
+                  props => (
+                     <div>
+                        <ExportCSVButton {...props.csvProps}>Export CSV!!</ExportCSVButton>
+                        <hr />
+                        <BootstrapTable {...props.baseProps} />
+                     </div>
+                  )
+               }
+            </ToolkitProvider> */}
+        </div>
+
+
+
+
+            );
+    }
 }
+
+
+            export default Table //exporting a component make it reusable and this is the beauty of react

@@ -20,6 +20,8 @@ export const Routes = () => {
                 <Route path='/extravio' component={Extravio} />
                 <Route path='/link' component={LinkAccount} />
                 <Route path='/reset' component={Reset} />
+                
+
 
                 <Route path='/' component={Home} />
 

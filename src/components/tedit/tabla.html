@@ -1,0 +1,73 @@
+<body>
+    <div class="container">
+      <div class="info">
+        <h1>Table Editing Functionality</h1>
+        <h3>Usage:</h3>
+        <ul>
+          <li>Double click Column Names to edit and leave to 'save'</li>
+          <li>Add additional rows using the green plus icon or 'Add Row' button</li>
+          <li>Remove 'this' specific row using the minus icon</li>
+          <li>Edit 'this specific row using the pencil-edit icon</li>
+        </ul>
+        <br>
+      </div>
+      <table class="tableContents">
+        <tr>
+          <th id="IDCol">ID #</th>
+          <th id="firstnameCol" contenteditable="false">Firstname</th>
+          <th id="lastnameCol" contenteditable="false">Lastname</th>
+          <th id="ageCol" contenteditable="false">Age</th>
+          <th id="genderCol" contenteditable="false">Gender</th>
+          <th id="heightCol" contenteditable="false">Height</th>
+          <th id="additionalnotesCol" contenteditable="false">Additional Notes</th>
+        </tr>
+        <tr>
+          <td class="idRow" contenteditable="false">1</td>
+          <td contenteditable="false">A1</td>
+          <td contenteditable="false">A2</td>
+          <td contenteditable="false">A3</td>
+          <td contenteditable="false">A4</td>
+          <td contenteditable="false">A5</td>
+          <td contenteditable="false">-</td>
+        </tr>
+        <tr>
+          <td class="idRow" contenteditable="false">2</td>
+          <td contenteditable="false">B1</td>
+          <td contenteditable="false">B2</td>
+          <td contenteditable="false">B3</td>
+          <td contenteditable="false">B4</td>
+          <td contenteditable="false">B5</td>
+          <td contenteditable="false">-</td>
+        </tr>
+        <tr>
+          <td class="idRow" contenteditable="false">3</td>
+          <td contenteditable="false">C1</td>
+          <td contenteditable="false">C2</td>
+          <td contenteditable="false">C3</td>
+          <td contenteditable="false">C4</td>
+          <td contenteditable="false">C5</td>
+          <td contenteditable="false">-</td>
+        </tr>
+        <tr>
+          <td class="idRow" contenteditable="false">4</td>
+          <td contenteditable="false">D1</td>
+          <td contenteditable="false">D2</td>
+          <td contenteditable="false">D3</td>
+          <td contenteditable="false">D4</td>
+          <td contenteditable="false">D5</td>
+          <td contenteditable="false">-</td>
+        </tr>
+        <tr id="bottomRow Row5">
+          <td class="idRow" contenteditable="false">5</td>
+          <td contenteditable="false">E1</td>
+          <td contenteditable="false">E2</td>
+          <td contenteditable="false">E3</td>
+          <td contenteditable="false">E4</td>
+          <td contenteditable="false">E5</td>
+          <td contenteditable="false">-</td>
+        </tr>
+      </table>
+      <br>
+      <button id="addRow">Add Row</button>
+    </div>
+  </body>
