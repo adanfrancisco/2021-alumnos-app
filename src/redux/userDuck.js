@@ -99,7 +99,7 @@ export let buscaUidAction =(uid) =>async (dispatch,getState)=>{
             //  saveStorage2(getState())
 
 
-        //    console.log(getState());
+           console.log(getState());
     }else{
         console.log('el dato no existe');
     }

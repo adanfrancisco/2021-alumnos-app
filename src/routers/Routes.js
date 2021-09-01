@@ -20,9 +20,10 @@ export const Routes = () => {
 
         if (localStorage.getItem("usuario")) {
 
-            let { authGoogle } = JSON.parse(localStorage.getItem("usuario"));
-            let { uid, displayName, photo, email } = authGoogle
-            dispatch(yaLogueadoAction(uid, displayName, photo, email))
+            //let { authGoogle } = JSON.parse(localStorage.getItem("usuario"));
+            let {dni,uid, displayName, photo, email } = JSON.parse(localStorage.getItem("usuario"));
+            //console.log(dni,uid)
+            dispatch(yaLogueadoAction(dni,uid, displayName, photo, email))
 
         } else {
             // console.log('no tiene autenticacion');
