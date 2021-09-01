@@ -2,7 +2,7 @@ import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card } from 'react-bootstrap';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Redirect} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { doGoogleLoginAction } from '../redux/userDuck';
 
@@ -11,7 +11,7 @@ export const Login = () => {
   const { fetching, loggedIn } = useSelector( store =>store.authGoogle);
 
   const dispatch = useDispatch()
-  let history = useHistory()
+  // let history = useHistory()
 
   const handleSubmit = () => {
     dispatch(doGoogleLoginAction())
@@ -19,7 +19,8 @@ export const Login = () => {
     
   }
   if(fetching) return <h2>Cargando...</h2>
-  if(loggedIn) history.push('/link');
+
+  if(loggedIn) return <Redirect to='/link'/>;//history.push('/link');
   return (
     <>
     

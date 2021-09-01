@@ -1,0 +1,1 @@
+export const uri = "https://is93.aloeadan.com/apii/";

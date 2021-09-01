@@ -20,6 +20,7 @@ let firebaseConfig = {
         )
   }
 
+
   export function logoutGoogle(){
     localStorage.clear()
       return firebase.auth().signOut()

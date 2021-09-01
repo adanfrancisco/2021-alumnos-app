@@ -38,7 +38,7 @@ export const Extravio = () => {
               </Card.Text>
               {/* <Button variant="primary">Go somewhere</Button> */}
               <input type='text' placeholder='DNI' />
-              <input type='text' placeholder='clave' />
+              <input type='text' placeholder='clave 6 numeros' />
               <div className='col-auto text-center'>
                 <button
                   style={{ justifyContent: 'center', marginRight: 5, marginTop: 10 }}

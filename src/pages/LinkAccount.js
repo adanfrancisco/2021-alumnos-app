@@ -1,18 +1,31 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Redirect, useHistory } from 'react-router-dom'
 import Header from '../components/Header'
-import {  useDispatch, useSelector } from 'react-redux'
-import { doLogoutAction } from '../redux/userDuck'
+import { useDispatch, useSelector } from 'react-redux'
+import { buscaUidAction, doLogoutAction } from '../redux/userDuck'
+import './link.css'
+
+
 
 export const LinkAccount = () => {
-    const { displayName } = useSelector( store =>store.authGoogle);
-    const  maxLengthCheck = (object) => {
-        if (object.target.value.length > object.target.maxLength) {
-         object.target.value = object.target.value.slice(0, object.target.maxLength)
-          }
-        }
-const dispatch = useDispatch()
+
+    const dispatch = useDispatch()
     let history = useHistory()
+    const {  usersystem, uid, displayName } = useSelector(store => store.authGoogle);
+
+    useEffect(() => {
+        if(uid!=null){
+            console.log('tiene user Id en Google');
+            dispatch(buscaUidAction(uid))
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const maxLengthCheck = (object) => {
+        if (object.target.value.length > object.target.maxLength) {
+            object.target.value = object.target.value.slice(0, object.target.maxLength)
+        }
+    }
 
     const [dni, setDNI] = useState(0)
 
@@ -20,7 +33,7 @@ const dispatch = useDispatch()
         dispatch(doLogoutAction())
         history.push('/login')
     }
-    const handleSubmit=(e)=>{
+    const handleSubmit = (e) => {
         e.PreventDefault()
         console.log('el dni ingresado es:', dni);
     }
@@ -29,7 +42,9 @@ const dispatch = useDispatch()
         setDNI(e.target.value)
         console.log(dni)
     }
-
+    
+    
+    if(!usersystem){
     return (
         <>
             <Header />
@@ -58,7 +73,7 @@ const dispatch = useDispatch()
                     </label>
                     <button
                         style={{ justifyContent: 'center', marginLeft: 5, marginTop: 0 }}
-                        className="btn btn-secondary btn-block mr-auto"
+                        className="btn btn-primary btn-block mr-auto"
 
                         type="submit"
                     >ENVIAR</button>
@@ -73,5 +88,8 @@ const dispatch = useDispatch()
 
             </form>
         </>
-    )
+    )}else{
+        return <Redirect to='/home'/>;
+        
+    }
 }
