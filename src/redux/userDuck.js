@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { loginWithGoogle, logoutGoogle } from '../auth/firebase'
-import {uri} from "../redux/vars";
+import {uri_local} from "../redux/vars";
+//cuando este en produccion debere importar solo uri
+//que hace referencia al back-end en la nube
+let uri = uri_local;
 
 let initialData={
     loggedIn : false,
@@ -17,11 +20,18 @@ let LOGIN_ERROR = 'LOGIN_ERROR';
 let LOGOUT = 'LOGOUT';
 let USERSYTEM_BUSCA ='USERSYTEM_BUSCA'
 let USERSYSTEM ='USERSYSTEM'
+let USER_SEARCH ='USER_SEARCH'
+let USER_SEARCH_EXITO ='USER_SEARCH_EXITO'
 
 //reducer
 export default function reducer(state=initialData, action){
     switch (action.type){
-        case USERSYTEM_BUSCA:
+        case USER_SEARCH_EXITO:
+            return{
+                ...state,
+                
+            }
+        case USERSYTEM_BUSCA||USER_SEARCH:
             return{
                 ...state,
                 feching:true
