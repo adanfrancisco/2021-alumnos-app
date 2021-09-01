@@ -4,17 +4,19 @@ import { useHistory } from 'react-router-dom';
 import { doLogoutAction } from '../redux/userDuck';
 
 
-// function saveStorage(storage){
-//     localStorage.setItem('dni', JSON.stringify(storage))
-// }
+ function saveStorage(storage){
+     localStorage.setItem('usuario', JSON.stringify(storage))
+ }
 export const Home = () => {
     const dispatch = useDispatch();
     const history = useHistory()
-
+    const estado = useSelector(store=>store.authGoogle)
     const { photo, dni, email, uid, displayName } = useSelector(store => store.authGoogle);
-    // saveStorage(dni)
+    //const stored = useSelector(store=>store.authGoogle)
+    saveStorage(estado)
 // console.log(photo);
-    
+    console.log( 'El DNI del store es:',dni)
+
     const handleReturn = () => {
         dispatch(doLogoutAction())
         history.push('/login')
