@@ -8,11 +8,11 @@ import { Home } from '../pages/Home';
 import { LinkAccount } from '../pages/LinkAccount';
 import 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux';
-import { yaLogueadoAction } from '../redux/userDuck';
+import { yaLogueadoAction, yaLogueadoSinValidarAction } from '../redux/userDuck';
 
 
 export const Routes = () => {
-    const { loggedIn } = useSelector((store) => store.authGoogle);
+    const { dni,loggedIn } = useSelector((store) => store.authGoogle);
     // console.log(loggedIn);
     const dispatch = useDispatch()
 
@@ -20,10 +20,19 @@ export const Routes = () => {
 
         if (localStorage.getItem("usuario")) {
 
-            //let { authGoogle } = JSON.parse(localStorage.getItem("usuario"));
-            let {dni,uid, displayName, photo, email } = JSON.parse(localStorage.getItem("usuario"));
-            //console.log(dni,uid)
+            let {dni,uid, displayName, photo, email} = JSON.parse(localStorage.getItem("usuario"));
+            // let {authGoogle} = JSON.parse(localStorage.getItem("usuario"));
+            //     let {dni,uid, displayName, photo, email }=authGoogle
+
+            if(typeof dni !== 'undefined'){
             dispatch(yaLogueadoAction(dni,uid, displayName, photo, email))
+            }else{
+                let {authGoogle} = JSON.parse(localStorage.getItem("usuario"));
+                let {uid, displayName, photo, email }=authGoogle
+                // console.log('en Routes:',uid, displayName,photo,email);
+
+                dispatch(yaLogueadoSinValidarAction(uid, displayName, photo, email))
+            }
 
         } else {
             // console.log('no tiene autenticacion');
@@ -33,7 +42,7 @@ export const Routes = () => {
         }
 
 
-    }, [dispatch, loggedIn])
+    }, [dispatch])
 
 
     return (
@@ -47,9 +56,10 @@ export const Routes = () => {
                 <Route exact path='/login' component={Login} />
                 <Route path='/extravio' component={Extravio} />
                 <Route path='/link' component={loggedIn ? LinkAccount : Login} />
-                <Route path='/reset' component={Reset} />
-                <Route path='/home' component={loggedIn ? Home : Login} />
+                <Route path='/home' component={dni ? Home : Login} />
 
+                <Route path='/reset' component={Reset} />
+                <Route path='**' component={Login} />
 
 
                 <Route path='/' component={Login} />
