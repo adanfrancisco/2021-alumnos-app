@@ -54,7 +54,7 @@ export const Routes = () => {
                 </Route>
 
                 <Route exact path='/login' component={Login} />
-                <Route path='/extravio' component={Extravio} />
+                <Route path='/extravio' component={ Extravio } />
                 <Route path='/link' component={loggedIn ? LinkAccount : Login} />
                 <Route path='/home' component={dni ? Home : Login} />
 

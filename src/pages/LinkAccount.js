@@ -7,7 +7,6 @@ import { buscaDniAction, buscaUidAction, doLogoutAction } from '../redux/userDuc
 import { useForm } from '../hooks/useForm'
 
 
-
 import './link.css'
 
 
@@ -18,10 +17,11 @@ export const LinkAccount = () => {
     let history = useHistory()
 
     //traigo info del store
-    const { fetching, usersystem, uid, dni, photo, email, displayName } = useSelector(store => store.authGoogle);
+    const { fetching, usersystem, uid, dni,uid_database, photo, email, displayName } = useSelector(store => store.authGoogle);
 
     const inputRef = useRef()
     const [botonActivo, setBotonActivo] = useState(true)
+
 
     useEffect(() => {
         if (uid != null) {
@@ -33,8 +33,7 @@ export const LinkAccount = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-
-
+  
 
     //uso el hook Form
     const [formValues, handleInputChange] = useForm({
@@ -43,8 +42,17 @@ export const LinkAccount = () => {
 
     const { midni } = formValues;
 
-    const handleAsociar = () => {
-        console.log('asociemos tu dni al uid de Google!');
+    const handleAsociar = (e) => {
+        // console.log('asociemos tu dni al uid de Google!->', dni);
+        let {textContent} = e.target
+        // console.log('hola',textContent);
+        if(textContent==='LIBERAR'){
+            console.log('dice Liberar!!!');
+            history.push ('/extravio')
+        }else{
+            console.log('dice Asociar@@!!!')
+        }
+
     }
 
     // const handleBuscaReset = () => {
@@ -54,8 +62,8 @@ export const LinkAccount = () => {
         e.preventDefault();
         //disparo la busqueda en la base de datos
         dispatch(buscaDniAction(midni))
-
-        console.log('buscando...', midni);
+        
+        // console.log('buscando...', midni);
     }
 
 
@@ -143,7 +151,7 @@ export const LinkAccount = () => {
 
                         <br />
 
-                        {dni === 0 ?
+                        {dni === 0?
                             <button
                                 style={{
                                     justifyContent: 'center',
@@ -164,6 +172,7 @@ export const LinkAccount = () => {
                                 }
                             </button>
                             :
+                            
                             <button
                                 style={{
                                     justifyContent: 'center',
@@ -173,11 +182,16 @@ export const LinkAccount = () => {
 
                                 className={fetching ? "btn btn-success btn-block mr-auto" : "btn btn-primary btn-block mr-auto"}
                                 onClick={handleAsociar}
+                                
+                                
                                 disabled={botonActivo}
                                 type="submit"
+                                key='asociar'
                             >
-                                ¿ASOCIAR?
-                            </button>}
+                               {(uid_database&uid!==uid_database)?'LIBERAR':'¿ASOCIAR?'}
+                            </button>
+                            
+                            }
                         <button
                             style={{
                                 justifyContent: 'center',
