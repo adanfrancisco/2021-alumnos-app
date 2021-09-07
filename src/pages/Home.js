@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Header from '../components/Header';
 import { doLogoutAction } from '../redux/userDuck';
 
 
@@ -25,8 +26,9 @@ export const Home = () => {
     return (
         <>
             <h2>USUARIO LOGUEADO</h2>
+            <Header/>
             Hola! {displayName} <br/> 
-            <img alt='Profile' src={photo} />
+            <img alt='Profile' className='rounded-circle' height='50' src={photo} />
             DNI: {dni} <br/>
             email: {email} <br/>
             uid: {uid}

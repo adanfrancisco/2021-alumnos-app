@@ -6,7 +6,7 @@ import { Link, Redirect} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { doGoogleLoginAction } from '../redux/userDuck';
 
-
+import { logo } from '../redux/vars'
 export const Login = () => {
   const { fetching, loggedIn } = useSelector( store =>store.authGoogle);
 
@@ -28,7 +28,7 @@ export const Login = () => {
       <div className='container-fluid'>
         <div className='row justify-content-center align-items-center minh-100'>
             <Card className='col-auto text-center' style={{ width: '20rem' }}>
-              <Card.Img variant="top" src="https://isfdyt93-bue.infd.edu.ar/sitio/wp-content/uploads/2019/10/INI2.jpeg" />
+              <Card.Img variant="top" src={logo} />
               <Card.Body>
                 <Card.Title className='col-auto text-center'>Sistema de Alumnos</Card.Title>
                 <Card.Text className='col-auto text-center'>

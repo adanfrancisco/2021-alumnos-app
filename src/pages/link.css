@@ -3,3 +3,5 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
+.ancho_boton { width: 175px !important; }
+
